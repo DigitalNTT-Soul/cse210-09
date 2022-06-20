@@ -32,7 +32,7 @@ class Snake_two(Actor):
             trailing.set_velocity(velocity)
 
     def get_head(self):
-        return self._segments[0]
+        return self._segments_snake_two[0]
 
     def grow_tail(self, number_of_segments):
         for i in range(number_of_segments):
