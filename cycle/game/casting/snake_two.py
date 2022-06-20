@@ -32,7 +32,7 @@ class Snake_two(Actor):
             trailing.set_velocity(velocity)
 
     def get_head(self):
-        return self._segments_snake_two[0]
+        return self._segments[0]
 
     def grow_tail(self, number_of_segments):
         for i in range(number_of_segments):
@@ -45,7 +45,7 @@ class Snake_two(Actor):
             segment.set_position(position)
             segment.set_velocity(velocity)
             segment.set_text("#")
-            segment.set_color(constants.GREEN)
+            segment.set_color(constants.RED)
             self._segments_snake_two.append(segment)
 
     def turn_head(self, velocity):
@@ -59,7 +59,7 @@ class Snake_two(Actor):
             position = Point(x - i * constants.CELL_SIZE, y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
             text = "8" if i == 0 else "#"
-            color = constants.YELLOW if i == 0 else constants.GREEN
+            color = constants.RED if i == 0 else constants.YELLOW
             
             segment = Actor()
             segment.set_position(position)
