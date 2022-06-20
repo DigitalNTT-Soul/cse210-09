@@ -49,7 +49,7 @@ class Snake_two(Actor):
             self._segments_snake_two.append(segment)
 
     def turn_head(self, velocity):
-        self._segments[0].set_velocity(velocity)
+        self._segments_snake_two[0].set_velocity(velocity)
     
     def _prepare_body(self):
         x = int(constants.MAX_X / 2 - 675)
