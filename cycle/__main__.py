@@ -15,6 +15,7 @@ from game.shared.point import Point
 
 
 def main():
+
     
     # create the cast
     cast = Cast()
@@ -25,6 +26,7 @@ def main():
     # start the game
     keyboard_service = KeyboardService()
     video_service = VideoService()
+
 
     script = Script()
     script.add_action("input", ControlActorsAction(keyboard_service))

@@ -1,3 +1,5 @@
+from game.services.sound_service import SoundService
+
 class Director:
     """A person who directs the game. 
     
@@ -14,6 +16,7 @@ class Director:
             video_service (VideoService): An instance of VideoService.
         """
         self._video_service = video_service
+        self._sound_service = SoundService()
         
     def start_game(self, cast, script):
         """Starts the game using the given cast and script. Runs the main game loop.
@@ -24,6 +27,7 @@ class Director:
         """
         self._video_service.open_window()
         while self._video_service.is_window_open():
+            self._sound_service.play_music()
             self._execute_actions("input", cast, script)
             self._execute_actions("update", cast, script)
             self._execute_actions("output", cast, script)
