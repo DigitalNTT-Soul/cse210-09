@@ -11,7 +11,7 @@ def play_music(midi_filename):
 
 
 path_to_here = os.path.abspath(__file__)
-midi_file_path = os.path.join(os.path.dirname(path_to_here), 'music/daft_punk.mid')
+midi_file_path = os.path.join(os.path.dirname(path_to_here), 'music/Tron.mp3')
 print(midi_file_path)
 midi_filename = midi_file_path
 
