@@ -2,6 +2,7 @@ import constants
 from game.casting.actor import Actor
 from game.scripting.action import Action
 from game.shared.point import Point
+from game.services.sound_service import SoundService
 
 class HandleCollisionsAction(Action):
     """
@@ -41,6 +42,7 @@ class HandleCollisionsAction(Action):
         snake = cast.get_first_actor("snakes")
         head = snake.get_segments()[0]
         segments = snake.get_segments()[1:]
+       
 
         snake_two = cast.get_first_actor("snakes_two")
         head_snake_two = snake_two.get_segments()[0]
@@ -49,20 +51,29 @@ class HandleCollisionsAction(Action):
         for segment in segments:
             if head_snake_two.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                welhelm = SoundService()
+                welhelm.play_wilhelm()
 
         for seg in segments_snake_two:
             if head.get_position().equals(seg.get_position()):
                 self._is_game_over = True
+                welhelm = SoundService()
+                welhelm.play_wilhelm()
         
         # Cyclist 1 loses if he runs into his own trail.        
         for segment in segments:
             if head.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                welhelm = SoundService()
+                welhelm.play_wilhelm()
+
+
         # Cyclist 2 loses if he runs into his own trail
         for segment in segments_snake_two:
             if head_snake_two.get_position().equals(segment.get_position()):
                 self._is_game_over = True
-
+                welhelm = SoundService()
+                welhelm.play_wilhelm()
 
 
         
