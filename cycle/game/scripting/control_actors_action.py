@@ -1,15 +1,13 @@
 import constants
 from game.scripting.action import Action
 from game.shared.point import Point
-from game.casting.snake import Snake
-from game.casting.snake_two import Snake_two
-
+from game.casting.cycle import Cycle
 
 class ControlActorsAction(Action):
-    """
-    An input action that controls the snake.
+    """-
+    An input action that controls the cycle.
     
-    The responsibility of ControlActorsAction is to get the direction and move the snake's head.
+    The responsibility of ControlActorsAction is to get the direction and move the cycle's head.
 
     Attributes:
         _keyboard_service (KeyboardService): An instance of KeyboardService.
@@ -22,10 +20,12 @@ class ControlActorsAction(Action):
             keyboard_service (KeyboardService): An instance of KeyboardService.
         """
         self._keyboard_service = keyboard_service
-        self._direction = Point(0, -constants.CELL_SIZE)
-        self._direction_two = Point(0, -constants.CELL_SIZE)
-        self._snake = Snake()
-        self._snake_two = Snake_two()
+        self._direction0 = Point(0, 0)
+        self._direction1 = Point(0, 0)
+        self._left = Point(-constants.CELL_SIZE, 0)
+        self._right = Point(constants.CELL_SIZE, 0)
+        self._up = Point(0, -constants.CELL_SIZE)
+        self._down = Point(0, constants.CELL_SIZE)
 
     def execute(self, cast, script):
         """Executes the control actors action.
@@ -35,13 +35,19 @@ class ControlActorsAction(Action):
             script (Script): The script of Actions in the game.
         """ 
         
-        snake = cast.get_first_actor("snakes")
-        snake_two = cast.get_first_actor("snakes_two")
-        snake.turn_head(self._direction)
-        snake_two.turn_head(self._direction_two)
+        cycles = cast.get_actors("cycles")
+        cycle0 = cycles[0]
+        cycle1 = cycles[1]
+        # head0_velocity = cycle0.get_head().get_velocity()
+        # head1_velocity = cycle1.get_head().get_velocity()
+        
+        # # Player 1 horizontal velocity
+        # x_vel = 0
+        # if not (head0_velocity is self._left or head0_velocity is self._right):
+        #     if not (self._keyboard_service.is_key_down('a') and self._keyboard_service.is_key_down('d')):   # make sure they're not both pressed at the same time
 
-# Snake one 
 
+        # Cycle one 
         # left
         if self._keyboard_service.is_key_down('a'):
             self._direction = Point(-constants.CELL_SIZE, 0)
@@ -59,7 +65,7 @@ class ControlActorsAction(Action):
             self._direction = Point(0, constants.CELL_SIZE)
 
             
-# Snake two
+        # Cycle two
 
         # up
         if self._keyboard_service.is_key_down('i'):
@@ -77,6 +83,5 @@ class ControlActorsAction(Action):
         if self._keyboard_service.is_key_down('l'):
             self._direction_two = Point(constants.CELL_SIZE, 0)
         
-          
-
-       
+        cycle0.turn_head(self._direction0)
+        cycle1.turn_head(self._direction1)

@@ -18,7 +18,6 @@ class DrawActorsAction(Action):
             video_service (VideoService): An instance of VideoService.
         """
         self._video_service = video_service
-        self._ticks = 0
 
     def execute(self, cast, script):
         """Executes the draw actors action.
@@ -29,27 +28,22 @@ class DrawActorsAction(Action):
         """
         score = cast.get_first_actor("scores")
 
-        snake = cast.get_first_actor("snakes")
-        snake_two = cast.get_first_actor("snakes_two")
+        cycles = cast.get_actors("cycles")
+        cycle0 = cycles[0]
+        cycle1 = cycles[1]
 
-        
+        # trail growth
+        cycle0.grow_tail(1)
+        cycle1.grow_tail(1)
 
-        # snake growth 
-        self._ticks = self._ticks + 1 
-        if self._ticks % 9 == 0:
-            snake.grow_tail(1)
-            snake_two.grow_tail(1)
-
-        segments = snake.get_segments()
-
-        snake_two = cast.get_first_actor("snakes_two")
-        segments_snake_two = snake_two.get_segments()
+        segments0 = cycle0.get_segments()
+        segments1 = cycle1.get_segments()
 
         messages = cast.get_actors("messages")
 
         self._video_service.clear_buffer()
-        self._video_service.draw_actors(segments)
-        self._video_service.draw_actors(segments_snake_two)
+        self._video_service.draw_actors(segments0)
+        self._video_service.draw_actors(segments1)
         self._video_service.draw_actor(score)
         self._video_service.draw_actors(messages, True)
         self._video_service.flush_buffer()
