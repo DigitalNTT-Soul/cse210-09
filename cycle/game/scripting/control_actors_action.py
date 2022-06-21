@@ -22,8 +22,8 @@ class ControlActorsAction(Action):
             keyboard_service (KeyboardService): An instance of KeyboardService.
         """
         self._keyboard_service = keyboard_service
-        self._direction = Point(constants.CELL_SIZE, 0)
-        self._direction_two = Point(constants.CELL_SIZE, 0)
+        self._direction = Point(0, -constants.CELL_SIZE)
+        self._direction_two = Point(0, -constants.CELL_SIZE)
         self._snake = Snake()
         self._snake_two = Snake_two()
 
@@ -40,46 +40,39 @@ class ControlActorsAction(Action):
         snake.turn_head(self._direction)
         snake_two.turn_head(self._direction_two)
 
+# Snake one 
+
         # left
         if self._keyboard_service.is_key_down('a'):
             self._direction = Point(-constants.CELL_SIZE, 0)
-
-           
-        
+ 
         # right
         if self._keyboard_service.is_key_down('d'):
             self._direction = Point(constants.CELL_SIZE, 0)
-
-         
 
         # up
         if self._keyboard_service.is_key_down('w'):
             self._direction = Point(0, -constants.CELL_SIZE)
 
-        
         # down
         if self._keyboard_service.is_key_down('s'):
             self._direction = Point(0, constants.CELL_SIZE)
 
             
+# Snake two
 
         # up
         if self._keyboard_service.is_key_down('i'):
             self._direction_two = Point(0, -constants.CELL_SIZE)
-
-           
-        
+  
         # down
         if self._keyboard_service.is_key_down('k'):
             self._direction_two = Point(0, constants.CELL_SIZE)
-
-          
-        
+  
         # left
         if self._keyboard_service.is_key_down('j'):
             self._direction_two = Point(-constants.CELL_SIZE, 0)
-
-        
+  
         # right
         if self._keyboard_service.is_key_down('l'):
             self._direction_two = Point(constants.CELL_SIZE, 0)

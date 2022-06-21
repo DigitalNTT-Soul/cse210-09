@@ -18,6 +18,7 @@ class DrawActorsAction(Action):
             video_service (VideoService): An instance of VideoService.
         """
         self._video_service = video_service
+        self._ticks = 0
 
     def execute(self, cast, script):
         """Executes the draw actors action.
@@ -27,15 +28,26 @@ class DrawActorsAction(Action):
             script (Script): The script of Actions in the game.
         """
         score = cast.get_first_actor("scores")
-        # food = cast.get_first_actor("foods")
+
         snake = cast.get_first_actor("snakes")
         snake_two = cast.get_first_actor("snakes_two")
+
+        
+
+        # snake growth 
+        self._ticks = self._ticks + 1 
+        if self._ticks % 9 == 0:
+            snake.grow_tail(1)
+            snake_two.grow_tail(1)
+
         segments = snake.get_segments()
+
+        snake_two = cast.get_first_actor("snakes_two")
         segments_snake_two = snake_two.get_segments()
+
         messages = cast.get_actors("messages")
 
         self._video_service.clear_buffer()
-        # self._video_service.draw_actor(food)
         self._video_service.draw_actors(segments)
         self._video_service.draw_actors(segments_snake_two)
         self._video_service.draw_actor(score)
