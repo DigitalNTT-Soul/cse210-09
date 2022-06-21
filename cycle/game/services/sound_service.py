@@ -10,7 +10,7 @@ class SoundService:
         channels = 2
         buffer = 1024
         pygame.mixer.init(freq, bitsize, channels, buffer)
-        pygame.mixer.music.set_volume(0.8)
+        pygame.mixer.music.set_volume(0.4)
         path_to_here = os.path.abspath(__file__)
         midi_file_path = os.path.join(os.path.dirname(path_to_here), 'music/Tron.mp3')
         pygame.mixer.music.load(midi_file_path)
