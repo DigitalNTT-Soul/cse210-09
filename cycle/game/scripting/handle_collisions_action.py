@@ -53,6 +53,17 @@ class HandleCollisionsAction(Action):
         for seg in segments_snake_two:
             if head.get_position().equals(seg.get_position()):
                 self._is_game_over = True
+        
+        # Cyclist 1 loses if he runs into his own trail.        
+        for segment in segments:
+            if head.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+        # Cyclist 2 loses if he runs into his own trail
+        for segment in segments_snake_two:
+            if head_snake_two.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+
+
 
         
     def _handle_game_over(self, cast):
