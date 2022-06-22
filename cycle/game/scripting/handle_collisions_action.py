@@ -17,6 +17,7 @@ class HandleCollisionsAction(Action):
 
     def __init__(self):
         """Constructs a new HandleCollisionsAction."""
+        self._first_collision = False
         self._is_game_over = False
         self._wilheim = SoundService()
 
@@ -66,8 +67,10 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-        # self._wilheim.play_wilhelm()
-        # self._wilheim.stop_music()
+        if self._first_collision == False:
+            self._wilheim.play_wilhelm()
+            self._wilheim.stop_music()
+            self._first_collision = True
 
         segments0 = cycles[0].get_segments()
         segments1 = cycles[1].get_segments()
