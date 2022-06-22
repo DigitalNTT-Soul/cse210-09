@@ -38,16 +38,9 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-<<<<<<< HEAD
         cycles = cast.get_actors("cycles")
         cycle0 = cycles[0]
         cycle1 = cycles[1]
-=======
-        snake = cast.get_first_actor("snakes")
-        head = snake.get_segments()[0]
-        segments = snake.get_segments()[1:]
-       
->>>>>>> 31488088f6863e9988c72dde3280a97eb4dc92f2
 
         head0 = cycle0.get_segments()[0]
         segments0 = cycle0.get_segments()[1:]
@@ -55,7 +48,6 @@ class HandleCollisionsAction(Action):
         head1 = cycle1.get_segments()[0]
         segments1 = cycle1.get_segments()[1:]
         
-<<<<<<< HEAD
         for segment in segments0:
             if (head0.get_position().equals(segment.get_position()) or
                 head1.get_position().equals(segment.get_position())):
@@ -65,36 +57,6 @@ class HandleCollisionsAction(Action):
             if (head0.get_position().equals(segment.get_position()) or
                 head1.get_position().equals(segment.get_position())):
                 self._handle_game_over(cast, cycles)
-=======
-        for segment in segments:
-            if head_snake_two.get_position().equals(segment.get_position()):
-                self._is_game_over = True
-                welhelm = SoundService()
-                welhelm.play_wilhelm()
-
-        for seg in segments_snake_two:
-            if head.get_position().equals(seg.get_position()):
-                self._is_game_over = True
-                welhelm = SoundService()
-                welhelm.play_wilhelm()
-        
-        # Cyclist 1 loses if he runs into his own trail.        
-        for segment in segments:
-            if head.get_position().equals(segment.get_position()):
-                self._is_game_over = True
-                welhelm = SoundService()
-                welhelm.play_wilhelm()
-
-
-        # Cyclist 2 loses if he runs into his own trail
-        for segment in segments_snake_two:
-            if head_snake_two.get_position().equals(segment.get_position()):
-                self._is_game_over = True
-                welhelm = SoundService()
-                welhelm.play_wilhelm()
-
-
->>>>>>> 31488088f6863e9988c72dde3280a97eb4dc92f2
         
     def _handle_game_over(self, cast, cycles):
         """Shows the 'game over' message and turns the cycle and food white if the game is over.
