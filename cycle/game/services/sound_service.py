@@ -33,24 +33,3 @@ class SoundService:
 
 
 
-
-"""
-
-# start playing the background music
-pygame.mixer.music.load(os.path.join(os.getcwd(), 'sound', 'main_theme.wav'))
-pygame.mixer.music.set_volume(0.3)
-pygame.mixer.music.play(loops=-1)  # loop forever
-Then later in the code, you can play sound effects through Channels:
-
-# play a sound on channel 0 with a max time of 600 milliseconds
-pygame.mixer.Channel(0).play(pygame.mixer.Sound('sound\gun_fire.wav'), maxtime=600)
-
-# you can play a longer sound on another channel and they won't conflict
-pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound\death.wav"), maxtime=2000)
-For more information on Channels
-
-if you are looking to set the volume of an individual channel, you can use the set_volume() function:
-
-channel.set_volume(0.5)  # play at 50% volume
-
-"""
