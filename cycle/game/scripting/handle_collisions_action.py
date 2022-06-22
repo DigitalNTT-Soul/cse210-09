@@ -18,6 +18,7 @@ class HandleCollisionsAction(Action):
     def __init__(self):
         """Constructs a new HandleCollisionsAction."""
         self._is_game_over = False
+        self._wilheim = SoundService()
 
     def get_game_over_bool(self):
         return self._is_game_over
@@ -52,6 +53,7 @@ class HandleCollisionsAction(Action):
             if (head0.get_position().equals(segment.get_position()) or
                 head1.get_position().equals(segment.get_position())):
                 self._handle_game_over(cast, cycles)
+
         
         for segment in segments1:
             if (head0.get_position().equals(segment.get_position()) or
@@ -64,6 +66,9 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
+        # self._wilheim.play_wilhelm()
+        # self._wilheim.stop_music()
+
         segments0 = cycles[0].get_segments()
         segments1 = cycles[1].get_segments()
 

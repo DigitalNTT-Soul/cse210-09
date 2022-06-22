@@ -66,17 +66,35 @@ class Cycle(Actor):
             x = int(constants.MAX_X * 3/4)
         y = int(constants.MAX_Y / 2)
 
+        # for i in range(constants.TRAIL_LENGTH):
+        #     # TODO certain things here should only happen for the head and not the trail
+        #     segment = Actor()
+        #     # head/trail changes
+        #     if i == 0: # if head
+        #         segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
+        #         segment.set_text("O")
+        #     else:
+        #         segment.set_text("#")
+        #     segment.set_color(self._primary_color)
+        #     segment.set_position(Point(x, y + i * constants.CELL_SIZE))
+        #     self._segments.append(segment)
+
         for i in range(constants.TRAIL_LENGTH):
             # TODO certain things here should only happen for the head and not the trail
+
             segment = Actor()
             # head/trail changes
+
             if i == 0: # if head
                 segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
-                segment.set_text("@")
+                segment.set_text("O")
+                segment.set_color(constants.RED)
             else:
                 segment.set_text("#")
-            segment.set_color(self._primary_color)
-            segment.set_position(Point(x, y + i * constants.CELL_SIZE))
+                    
+            segment.set_position(Point(x - i * constants.CELL_SIZE, y))
+            segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
+            segment.set_color(constants.YELLOW )
             self._segments.append(segment)
 
     def reset_body(self):
