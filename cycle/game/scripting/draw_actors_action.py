@@ -32,9 +32,6 @@ class DrawActorsAction(Action):
         cycle0 = cycles[0]
         cycle1 = cycles[1]
 
-        # trail growth
-        cycle0.grow_tail(1)
-        cycle1.grow_tail(1)
 
         segments0 = cycle0.get_segments()
         segments1 = cycle1.get_segments()

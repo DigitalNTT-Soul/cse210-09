@@ -16,7 +16,12 @@ class Cycle(Actor):
         super().__init__()
         self._player_num = player_num
         self._segments = []
+        if not self._player_num: # player 1 returns false
+            self._primary_color = constants.GREEN
+        else:
+            self._primary_color = constants.RED
         self._prepare_body()
+        
 
     def get_segments(self):
         return self._segments
@@ -32,6 +37,7 @@ class Cycle(Actor):
             previous = self._segments[i - 1]
             velocity = previous.get_velocity()
             trailing.set_velocity(velocity)
+        self.grow_tail(1)
 
     def get_head(self):
         return self._segments[0]
@@ -47,7 +53,7 @@ class Cycle(Actor):
             segment.set_position(position)
             segment.set_velocity(velocity)
             segment.set_text("#")
-            segment.set_color(constants.GREEN)
+            segment.set_color(self._primary_color)
             self._segments.append(segment)
 
     def turn_head(self, velocity):
@@ -57,20 +63,20 @@ class Cycle(Actor):
         if self._player_num == 0:
             x = int(constants.MAX_X * 1/4)
         else:
-            x = int(constants.MAS_X * 3/4)
+            x = int(constants.MAX_X * 3/4)
         y = int(constants.MAX_Y / 2)
 
         for i in range(constants.TRAIL_LENGTH):
-            position = Point(x, y - i * constants.CELL_SIZE)
-            velocity = Point(1 * constants.CELL_SIZE, 0)
-            text = "O" if i == 0 else "#"
-            color = constants.BLUE if i == 0 else constants.GREEN
-            
+            # TODO certain things here should only happen for the head and not the trail
             segment = Actor()
-            segment.set_position(position)
-            segment.set_velocity(velocity)
-            segment.set_text(text)
-            segment.set_color(color)
+            # head/trail changes
+            if i == 0: # if head
+                segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
+                segment.set_text("@")
+            else:
+                segment.set_text("#")
+            segment.set_color(self._primary_color)
+            segment.set_position(Point(x, y + i * constants.CELL_SIZE))
             self._segments.append(segment)
 
     def reset_body(self):
