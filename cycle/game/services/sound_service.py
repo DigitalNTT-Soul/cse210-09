@@ -14,12 +14,19 @@ class SoundService:
         path_to_here = os.path.abspath(__file__)
         midi_file_path = os.path.join(os.path.dirname(path_to_here), 'music/Tron.mp3')
         pygame.mixer.music.load(midi_file_path)
+
     def play_music(self):
         '''Stream music_file in a blocking manner'''
         if not pygame.mixer.music.get_busy():
           pygame.mixer.music.play()
 
+    def play_wilhelm(self):
+        path_to_here = os.path.abspath(__file__)
+        midi_file_path = os.path.join(os.path.dirname(path_to_here), 'music/wilhelmscream.mp3')
+        pygame.mixer.music.load(midi_file_path)
 
 SoundService().play_music()
+
+
 
 
