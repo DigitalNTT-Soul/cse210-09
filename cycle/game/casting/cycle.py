@@ -12,14 +12,21 @@ class Cycle(Actor):
     Attributes:
         _points (int): The number of points the food is worth.
     """
-    def __init__(self, player_num: int = 0):
+    def __init__(self, player_num: int = 0, player_count: int = 2):
         super().__init__()
         self._player_num = player_num
+        self._player_count = player_count
         self._segments = []
-        if not self._player_num: # player 1 returns false
-            self._primary_color = constants.GREEN
-        else:
-            self._primary_color = constants.RED
+        match player_num:
+            case 0:
+                self._primary_color = constants.GREEN
+            case 1:
+                self._primary_color = constants.RED
+            case 2:
+                self._primary_color = constants.BLUE
+            case 3:
+                self._primary_color = constants.YELLOW
+        
         self._prepare_body()
         
 
@@ -60,46 +67,13 @@ class Cycle(Actor):
         self._segments[0].set_velocity(velocity)
     
     def _prepare_body(self):
-        if self._player_num == 0:
-            x = int(constants.MAX_X * 1/4)
-        else:
-            x = int(constants.MAX_X * 3/4)
-        y = int(constants.MAX_Y / 2)
+        head = Actor()
+        head.set_position(Point(int(constants.MAX_X * (self._player_num + 1)/(self._player_count + 1)), int(constants.MAX_Y / 2)))
+        head.set_velocity(Point(constants.CELL_SIZE, 0))
+        head.set_text("@")
+        head.set_color(constants.WHITE)
 
-        # for i in range(constants.TRAIL_LENGTH):
-        #     # TODO certain things here should only happen for the head and not the trail
-        #     segment = Actor()
-        #     # head/trail changes
-        #     if i == 0: # if head
-        #         segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
-        #         segment.set_text("O")
-        #     else:
-        #         segment.set_text("#")
-        #     segment.set_color(self._primary_color)
-        #     segment.set_position(Point(x, y + i * constants.CELL_SIZE))
-        #     self._segments.append(segment)
-
-        for i in range(constants.TRAIL_LENGTH):
-            # TODO certain things here should only happen for the head and not the trail
-
-            segment = Actor()
-            # head/trail changes
-
-            if i == 0: # if head
-                
-                segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
-                segment.set_text("O")
-                # segment.set_color(constants.RED)
-            else:
-                segment.set_text("#")
-                    
-            segment.set_position(Point(x - i * constants.CELL_SIZE, y))
-            segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
-            if self._player_num == 0:
-                segment.set_color(constants.BLUE)
-            else:
-                segment.set_color(constants.YELLOW)
-            self._segments.append(segment)
+        self._segments.append(head)
 
     def reset_body(self):
         self._segments = []
