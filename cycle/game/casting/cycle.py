@@ -86,15 +86,19 @@ class Cycle(Actor):
             # head/trail changes
 
             if i == 0: # if head
+                
                 segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
                 segment.set_text("O")
-                segment.set_color(constants.RED)
+                # segment.set_color(constants.RED)
             else:
                 segment.set_text("#")
                     
             segment.set_position(Point(x - i * constants.CELL_SIZE, y))
             segment.set_velocity(Point(1 * constants.CELL_SIZE, 0))
-            segment.set_color(constants.YELLOW )
+            if self._player_num == 0:
+                segment.set_color(constants.BLUE)
+            else:
+                segment.set_color(constants.YELLOW)
             self._segments.append(segment)
 
     def reset_body(self):
