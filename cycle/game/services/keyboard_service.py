@@ -25,7 +25,10 @@ class KeyboardService:
         self._keys['k'] = pyray.KEY_K
         self._keys['l'] = pyray.KEY_L
 
+        #restart game
         self._keys['r'] = pyray.KEY_R
+        
+        #exit game
         self._keys['x'] = pyray.KEY_X
         
 
