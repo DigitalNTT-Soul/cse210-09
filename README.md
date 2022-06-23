@@ -21,6 +21,7 @@ browse to the project's root folder. Start the program by running the following 
 
 ```
 pip install raylib
+pip install pygame
 ```
 
 ```
@@ -28,7 +29,7 @@ python3 Cycle
 ```
 
 You can also run the program from an IDE like Visual Studio Code. Start your IDE and open the
-project folder. Select the main module inside the hilo folder and click the "run" button.
+project folder. Select the main module inside the cycle folder and click the "run" button.
 
 - Players can move up, down, left and right...
   - Player one moves using the W, S, A and D keys.
