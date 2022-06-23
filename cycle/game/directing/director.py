@@ -43,20 +43,20 @@ class Director:
             cast (Cast): The cast of actors.
             script (Script): The script of actions.
         """
-        while self._play_new_round:
-            self._video_service.open_window()
-            self._build_game()
+        #while self._play_new_round:
+        self._video_service.open_window()
+        self._build_game()
             
-            while self._video_service.is_window_open():
-                self._sound_service.play_music()
-                self._execute_actions("input")
-                self._execute_actions("update")
-                self._execute_actions("output")
+        while self._video_service.is_window_open():
+            self._sound_service.play_music()
+            self._execute_actions("input")
+            self._execute_actions("update")
+            self._execute_actions("output")
                 
                 #exits game if 'x' is pressed
-                if self._keyboard_service.is_key_down('x'):
+            if self._keyboard_service.is_key_down('x'):
                     return
-                if self._keyboard_service.is_key_down('r'):
+            if self._keyboard_service.is_key_down('r'):
                           # self._cycles = self._cast.get_actors("cycles")
         # self._cycle0 = self._cycles[0]
         # self._cycle1 = self._cycles[1]
