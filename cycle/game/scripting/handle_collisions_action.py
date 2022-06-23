@@ -3,6 +3,7 @@ from game.casting.actor import Actor
 from game.scripting.action import Action
 from game.shared.point import Point
 from game.services.sound_service import SoundService
+# from game.casting.score import Score
 
 class HandleCollisionsAction(Action):
     """
@@ -18,6 +19,7 @@ class HandleCollisionsAction(Action):
     def __init__(self):
         """Constructs a new HandleCollisionsAction."""
         self._first_collision = False
+        self._give_point_collision = False
         self._is_game_over = False
         self._wilheim = SoundService()
 
@@ -50,16 +52,37 @@ class HandleCollisionsAction(Action):
         head1 = cycle1.get_segments()[0]
         segments1 = cycle1.get_segments()[1:]
         
-        for segment in segments0:
-            if (head0.get_position().equals(segment.get_position()) or
-                head1.get_position().equals(segment.get_position())):
-                self._handle_game_over(cast, cycles)
+        # for segment in segments0:
+        #     if (head0.get_position().equals(segment.get_position()) or
+        #         head1.get_position().equals(segment.get_position())):
+        #         self._handle_game_over(cast, cycles)
 
-        
-        for segment in segments1:
-            if (head0.get_position().equals(segment.get_position()) or
-                head1.get_position().equals(segment.get_position())):
+        # for segment in segments1:
+        #     if (head0.get_position().equals(segment.get_position()) or
+        #         head1.get_position().equals(segment.get_position())):
+        #         self._handle_game_over(cast, cycles)
+
+        for segment in segments0:
+            if head0.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
+                self._handle_points(cast, 1)
+
+        for segment in segments0:
+            if head1.get_position().equals(segment.get_position()):
+                self._handle_game_over(cast, cycles)
+                self._handle_points(cast, 0)
+
+        for segment in segments1:
+            if head0.get_position().equals(segment.get_position()):
+                self._handle_game_over(cast, cycles)
+                self._handle_points(cast, 1)
+
+        for segment in segments1:
+            if head1.get_position().equals(segment.get_position()):
+                self._handle_game_over(cast, cycles)
+                self._handle_points(cast, 0)
+    
+       
         
     def _handle_game_over(self, cast, cycles):
         """Shows the 'game over' message and turns the cycle and food white if the game is over.
@@ -80,7 +103,9 @@ class HandleCollisionsAction(Action):
         position = Point(x, y)
 
         message = Actor()
-        message.set_text("Game Over!")
+        message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R")
+        message.set_font_size(30)
+        message.set_color(config.YELLOW)
         message.set_position(position)
         cast.add_actor("messages", message)
 
@@ -91,5 +116,23 @@ class HandleCollisionsAction(Action):
             segment.set_color(config.WHITE)
            
 
+    def _handle_points(self, cast, cycle_num):
 
-        
+        scores = cast.get_actors("scores")
+        score0 = scores[0]
+        score1 = scores[1]
+
+        if cycle_num == 0:
+            if self._give_point_collision == False:
+                score0.add_points(1)
+                self._give_point_collision = True
+
+        if cycle_num == 1:
+             if self._give_point_collision == False:
+                score1.add_points(1)
+                self._give_point_collision = True
+
+    def reset_collisions(self):
+        self._first_collision = True
+        self._give_point_collision = True
+        self._is_game_over = True

@@ -31,8 +31,17 @@ class Director:
         self._video_service = VideoService()
         self._sound_service = SoundService()
         self._cast = Cast()
+        # self._cycles = self._cast.get_actors("cycles")
+        # self._cycle0 = self._cycles[0]
+        # self._cycle1 = self._cycles[1]
+        # self._scores = self._cast.get_actors("scores")
+        # self._score0 = self._scores[0]
+        # self._score1 = self._scores[0]
+        # self._collision = handle_collisions_action()
         self._script = Script()
-        
+        self._play_new_round = True
+               
+
     def start_game(self):
         """Starts the game using the given cast and script. Runs the main game loop.
 
@@ -40,21 +49,27 @@ class Director:
             cast (Cast): The cast of actors.
             script (Script): The script of actions.
         """
-        # self._sound_service.play_wilhelm()
-        self._video_service.open_window()
-        self._build_game()
-        while self._video_service.is_window_open():
-            self._sound_service.play_music()
-            self._execute_actions("input")
-            self._execute_actions("update")
-            self._execute_actions("output")
-        self._video_service.close_window()
+        while self._play_new_round:
+            self._video_service.open_window()
+            self._build_game()
+            # self._cycle0.reset_body()
+            # self._cycle1.reset_body()
+            # self._score0.reset_points()
+            # self._score1.reset_points()
+            # self._cast.reset_collisions()
+            while self._video_service.is_window_open():
+                self._sound_service.play_music()
+                self._execute_actions("input")
+                self._execute_actions("update")
+                self._execute_actions("output")
+            self._video_service.close_window()
 
     def _build_game(self):
         for i in range(config.PLAYER_COUNT):
             self._cast.add_actor("cycles", Cycle(i, config.PLAYER_COUNT))
 
-        self._cast.add_actor("scores", Score())
+        for i in range(config.PLAYER_COUNT):
+            self._cast.add_actor("scores", Score(i, config.PLAYER_COUNT))
 
         self._script.add_action("input", ControlActorsAction(self._keyboard_service))
         self._script.add_action("update", MoveActorsAction())
