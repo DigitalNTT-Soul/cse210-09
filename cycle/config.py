@@ -6,11 +6,7 @@ ROWS = 20
 CELL_SIZE = 15
 MAX_X = 900
 MAX_Y = 600
-<<<<<<< HEAD
-FRAME_RATE = 15
-=======
 FRAME_RATE = 7
->>>>>>> 19be4cc94d3c3b68cffa57be301abef780da7d12
 FONT_SIZE = 15
 CAPTION = "CYCLE"
 WHITE = Color(255, 255, 255)
