@@ -88,5 +88,5 @@ class Director:
         for action in actions:
             action.execute(self._cast, self._script)
     
-    def end_game(self):
-        """Exits game if player presses """
+    #def end_game(self):
+        #"""Exits game if player presses """
