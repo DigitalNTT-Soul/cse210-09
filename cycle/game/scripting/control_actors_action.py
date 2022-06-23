@@ -86,3 +86,7 @@ class ControlActorsAction(Action):
         
         cycle0.turn_head(self._direction0)
         cycle1.turn_head(self._direction1)
+
+    def reset_direction(self):
+        self._direction0 = self._up
+        self._direction1 = self._up

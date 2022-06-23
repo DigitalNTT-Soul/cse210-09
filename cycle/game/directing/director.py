@@ -66,8 +66,10 @@ class Director:
 
                     actions = self._script.get_actions("update")
                     handle_collisions = actions[1]
-
+                    inputs = self._script.get_actions("input")
+                    handle_inputs = inputs[0]
                     handle_collisions.reset_collisions()
+                    handle_inputs.reset_direction()
 
         self._video_service.close_window()
 
