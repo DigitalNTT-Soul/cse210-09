@@ -1,4 +1,4 @@
-import constants
+import config
 from game.casting.actor import Actor
 from game.shared.point import Point
 
@@ -19,13 +19,13 @@ class Cycle(Actor):
         self._segments = []
         match player_num:
             case 0:
-                self._primary_color = constants.GREEN
+                self._primary_color = config.GREEN
             case 1:
-                self._primary_color = constants.RED
+                self._primary_color = config.RED
             case 2:
-                self._primary_color = constants.BLUE
+                self._primary_color = config.BLUE
             case 3:
-                self._primary_color = constants.YELLOW
+                self._primary_color = config.YELLOW
         
         self._prepare_body()
         
@@ -68,10 +68,10 @@ class Cycle(Actor):
     
     def _prepare_body(self):
         head = Actor()
-        head.set_position(Point(int(constants.MAX_X * (self._player_num + 1)/(self._player_count + 1)), int(constants.MAX_Y / 2)))
-        head.set_velocity(Point(constants.CELL_SIZE, 0))
+        head.set_position(Point(int(config.MAX_X * (self._player_num + 1)/(self._player_count + 1)), int(config.MAX_Y / 2)))
+        head.set_velocity(Point(config.CELL_SIZE, 0))
         head.set_text("@")
-        head.set_color(constants.WHITE)
+        head.set_color(config.WHITE)
 
         self._segments.append(head)
 

@@ -1,5 +1,5 @@
 import pyray
-import constants
+import config
 
 
 class VideoService:
@@ -76,16 +76,16 @@ class VideoService:
         Args:
             title (string): The title of the window.
         """
-        pyray.init_window(constants.MAX_X, constants.MAX_Y, constants.CAPTION)
-        pyray.set_target_fps(constants.FRAME_RATE)
+        pyray.init_window(config.MAX_X, config.MAX_Y, config.CAPTION)
+        pyray.set_target_fps(config.FRAME_RATE)
 
     def _draw_grid(self):
         """Draws a grid on the screen."""
-        for y in range(0, constants.MAX_Y, constants.CELL_SIZE):
-            pyray.draw_line(0, y, constants.MAX_X, y, pyray.GRAY)
+        for y in range(0, config.MAX_Y, config.CELL_SIZE):
+            pyray.draw_line(0, y, config.MAX_X, y, pyray.GRAY)
             
-        for x in range(0, constants.MAX_X, constants.CELL_SIZE):
-            pyray.draw_line(x, 0, x, constants.MAX_Y, pyray.GRAY)
+        for x in range(0, config.MAX_X, config.CELL_SIZE):
+            pyray.draw_line(x, 0, x, config.MAX_Y, pyray.GRAY)
     
     def _get_x_offset(self, text, font_size):
         width = pyray.measure_text(text, font_size)

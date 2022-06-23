@@ -1,4 +1,4 @@
-import constants
+import config
 from game.casting.actor import Actor
 from game.scripting.action import Action
 from game.shared.point import Point
@@ -75,8 +75,8 @@ class HandleCollisionsAction(Action):
         segments0 = cycles[0].get_segments()
         segments1 = cycles[1].get_segments()
 
-        x = int(constants.MAX_X / 2)
-        y = int(constants.MAX_Y / 2)
+        x = int(config.MAX_X / 2)
+        y = int(config.MAX_Y / 2)
         position = Point(x, y)
 
         message = Actor()
@@ -85,10 +85,10 @@ class HandleCollisionsAction(Action):
         cast.add_actor("messages", message)
 
         for segment in segments0:
-            segment.set_color(constants.WHITE)
+            segment.set_color(config.WHITE)
 
         for segment in segments1:
-            segment.set_color(constants.WHITE)
+            segment.set_color(config.WHITE)
            
 
 

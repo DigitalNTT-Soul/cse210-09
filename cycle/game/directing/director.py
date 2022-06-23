@@ -1,4 +1,4 @@
-import constants
+import config
 from game.scripting.control_actors_action import ControlActorsAction
 from game.scripting.move_actors_action import MoveActorsAction
 from game.scripting.handle_collisions_action import HandleCollisionsAction
@@ -51,8 +51,8 @@ class Director:
         self._video_service.close_window()
 
     def _build_game(self):
-        for i in range(constants.PLAYER_COUNT):
-            self._cast.add_actor("cycles", Cycle(i, constants.PLAYER_COUNT))
+        for i in range(config.PLAYER_COUNT):
+            self._cast.add_actor("cycles", Cycle(i, config.PLAYER_COUNT))
 
         self._cast.add_actor("scores", Score())
 
