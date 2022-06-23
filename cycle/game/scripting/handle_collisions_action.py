@@ -103,7 +103,7 @@ class HandleCollisionsAction(Action):
         position = Point(x, y)
 
         message = Actor()
-        message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R")
+        message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R OR PRESS X TO EXIT THE GRID")
         message.set_font_size(30)
         message.set_color(config.YELLOW)
         message.set_position(position)
