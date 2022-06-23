@@ -34,6 +34,7 @@ project folder. Select the main module inside the cycle folder and click the "ru
 - Players can move up, down, left and right...
   - Player one moves using the W, S, A and D keys.
   - Player two moves using the I, K, J and L keys.
+  - The x key will terminate the game 
 - Each player's trail grows as they move.
 - Players try to maneuver so the opponent collides with their trail.
 - If a player collides with their opponent's trail...
