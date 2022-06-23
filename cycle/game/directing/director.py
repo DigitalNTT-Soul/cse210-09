@@ -31,11 +31,7 @@ class Director:
         self._video_service = VideoService()
         self._sound_service = SoundService()
         self._cast = Cast()
-<<<<<<< HEAD
         #self._handelcollisionsaction = HandleCollisionsAction()  
-=======
-        # self._handelcollisionsaction = HandleCollisionsAction()  
->>>>>>> 19be4cc94d3c3b68cffa57be301abef780da7d12
         self._script = Script()
         self._play_new_round = True
                
