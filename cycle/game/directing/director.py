@@ -63,8 +63,13 @@ class Director:
                     cycle1 = cycles[1]
                     cycle0.reset_body()
                     cycle1.reset_body()
-                    # self._handelcollisionsaction.reset_collisions()
-                    self._video_service.close_window()
+
+                    actions = self._script.get_actions("update")
+                    handle_collisions = actions[1]
+
+                    handle_collisions.reset_collisions()
+
+        self._video_service.close_window()
 
     def _build_game(self):
         for i in range(config.PLAYER_COUNT):

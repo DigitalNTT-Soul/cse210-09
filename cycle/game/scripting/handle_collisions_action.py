@@ -133,6 +133,6 @@ class HandleCollisionsAction(Action):
                 self._give_point_collision = True
 
     def reset_collisions(self):
-        self._first_collision = True
-        self._give_point_collision = True
-        self._is_game_over = True
+        self._first_collision = False
+        self._give_point_collision = False
+        self._is_game_over = False
