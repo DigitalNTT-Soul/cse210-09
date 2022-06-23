@@ -27,7 +27,7 @@ class KeyboardService:
 
         self._keys['r'] = pyray.KEY_R
         self._keys['x'] = pyray.KEY_X
-        self._keys['m'] = pyray.KEY_M
+        
 
     def is_key_up(self, key):
         """Checks if the given key is currently up.
