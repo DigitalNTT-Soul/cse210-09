@@ -31,7 +31,7 @@ class Director:
         self._video_service = VideoService()
         self._sound_service = SoundService()
         self._cast = Cast()
-        self._handelcollisionsaction = HandleCollisionsAction()  
+        #self._handelcollisionsaction = HandleCollisionsAction()  
         self._script = Script()
         self._play_new_round = True
                
@@ -69,7 +69,7 @@ class Director:
                     cycle1 = cycles[1]
                     cycle0.reset_body()
                     cycle1.reset_body()
-                    self._handelcollisionsaction.reset_collisions()
+                    #self._handelcollisionsaction.reset_collisions()
             self._video_service.close_window()
 
     def _build_game(self):
