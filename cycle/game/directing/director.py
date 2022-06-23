@@ -62,6 +62,8 @@ class Director:
                 self._execute_actions("input")
                 self._execute_actions("update")
                 self._execute_actions("output")
+                if self._keyboard_service.is_key_down('x'):
+                    return
             self._video_service.close_window()
 
     def _build_game(self):

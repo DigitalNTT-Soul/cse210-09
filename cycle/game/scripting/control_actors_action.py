@@ -86,7 +86,3 @@ class ControlActorsAction(Action):
         
         cycle0.turn_head(self._direction0)
         cycle1.turn_head(self._direction1)
-
-        # exit game
-        if self._keyboard_service.is_key_down('x'):
-            self.
