@@ -31,13 +31,7 @@ class Director:
         self._video_service = VideoService()
         self._sound_service = SoundService()
         self._cast = Cast()
-        # self._cycles = self._cast.get_actors("cycles")
-        # self._cycle0 = self._cycles[0]
-        # self._cycle1 = self._cycles[1]
-        # self._scores = self._cast.get_actors("scores")
-        # self._score0 = self._scores[0]
-        # self._score1 = self._scores[0]
-        # self._collision = handle_collisions_action()
+        self._handelcollisionsaction = HandleCollisionsAction()  
         self._script = Script()
         self._play_new_round = True
                
@@ -52,11 +46,7 @@ class Director:
         while self._play_new_round:
             self._video_service.open_window()
             self._build_game()
-            # self._cycle0.reset_body()
-            # self._cycle1.reset_body()
-            # self._score0.reset_points()
-            # self._score1.reset_points()
-            # self._cast.reset_collisions()
+            
             while self._video_service.is_window_open():
                 self._sound_service.play_music()
                 self._execute_actions("input")
@@ -66,6 +56,20 @@ class Director:
                 #exits game if 'x' is pressed
                 if self._keyboard_service.is_key_down('x'):
                     return
+                if self._keyboard_service.is_key_down('r'):
+                          # self._cycles = self._cast.get_actors("cycles")
+        # self._cycle0 = self._cycles[0]
+        # self._cycle1 = self._cycles[1]
+        # self._scores = self._cast.get_actors("scores")
+        # self._score0 = self._scores[0]
+        # self._score1 = self._scores[0]
+        # self._collision = handle_collisions_action()
+                    cycles = self._cast.get_actors("cycles")
+                    cycle0 = cycles[0]
+                    cycle1 = cycles[1]
+                    cycle0.reset_body()
+                    cycle1.reset_body()
+                    self._handelcollisionsaction.reset_collisions()
             self._video_service.close_window()
 
     def _build_game(self):
