@@ -90,8 +90,27 @@ Python 3.10.4
 
 ---
 
-- # Dylan Ruppell (ruppelld@byui.edu) (github: DigitalNTT-Soul)
-- # Austin Donovan (iskarr9g@gmail.com) (github: Iskarr)
-- # Matt Pellét (mattpellet@byui.edu) (github: m4j0rCSE)
-- # Larry Brys (bry21010@byui.edu) (github: ljbrys)
-- # Ryan Manthey (ryanscom@byui.edu) (github: ryanscom)
+* Dylan Ruppell (ruppelld@byui.edu) (github: DigitalNTT-Soul)
+    -
+    -
+    -
+    
+* Austin Donovan (iskarr9g@gmail.com) (github: Iskarr)
+    -
+    -
+    -
+
+* Matt Pellét (mattpellet@byui.edu) (github: m4j0rCSE) 
+    - Xtreme Technical Support
+    - Exit-game function
+    - End-game message (contributor)
+
+* Larry Brys (bry21010@byui.edu) (github: ljbrys)
+    -
+    -
+    -
+
+* Ryan Manthey (ryanscom@byui.edu) (github: ryanscom)
+    -
+    -
+    -
