@@ -4,9 +4,9 @@ from game.shared.color import Color
 COLUMNS = 40
 ROWS = 20
 CELL_SIZE = 15
-MAX_X = 900
-MAX_Y = 600
-FRAME_RATE = 10
+MAX_X = 1024
+MAX_Y = 768
+FRAME_RATE = 7
 FONT_SIZE = 15
 CAPTION = "CYCLE"
 WHITE = Color(255, 255, 255)
