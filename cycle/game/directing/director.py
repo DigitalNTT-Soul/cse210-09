@@ -45,16 +45,12 @@ class Director:
         # while self._play_new_round:
         self._video_service.open_window()
         self._build_game()
-            
+        self._sound_service.play_music()
+
         while self._video_service.is_window_open():
-            self._sound_service.play_music()
             self._execute_actions("input")
             self._execute_actions("update")
             self._execute_actions("output")
-                
-            # exits game if 'x' is pressed
-            if self._keyboard_service.is_key_down('x'):
-                    return
 
             # gets the first collision booleon from handle_collisions_action
             actions = self._script.get_actions("update")
@@ -66,14 +62,10 @@ class Director:
             
                         # for reseting the cycle trails
                         cycles = self._cast.get_actors("cycles")
-                        cycle0 = cycles[0]
-                        cycle1 = cycles[1]
-                        cycle0.reset_body()
-                        cycle1.reset_body()
+                        for cycle in cycles:
+                            cycle.reset_body()
 
                         # for reseting collisions and round over message
-                        actions = self._script.get_actions("update")
-                        handle_collisions = actions[1]
                         handle_collisions.reset_collisions()
 
                         # for reseting the direction the cycles are moving for the next round

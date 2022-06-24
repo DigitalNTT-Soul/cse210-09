@@ -99,7 +99,7 @@ class HandleCollisionsAction(Action):
 
         if self._first_collision == False:
             self._wilheim.play_wilhelm()
-            self._wilheim.stop_music()
+            # self._wilheim.stop_music()
             self._first_collision = True
 
         segments0 = cycles[0].get_segments()
@@ -111,7 +111,7 @@ class HandleCollisionsAction(Action):
 
         if self._new_round_message == True:
             
-            self._message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R\n OR PRESS X TO EXIT THE GRID")
+            self._message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R\n OR PRESS ESC TO EXIT THE GRID")
             # self._message.set_text(" ") 
             self._message.set_font_size(30)
             self._message.set_color(config.YELLOW)
