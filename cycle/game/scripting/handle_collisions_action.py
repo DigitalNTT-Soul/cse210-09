@@ -27,6 +27,9 @@ class HandleCollisionsAction(Action):
     def get_game_over_bool(self):
         return self._is_game_over
 
+    def get_first_collision_bool(self):
+        return self._first_collision
+
     def execute(self, cast, script):
         """Executes the handle collisions action.
 

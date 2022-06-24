@@ -39,6 +39,7 @@ class ControlActorsAction(Action):
         cycles = cast.get_actors("cycles")
         cycle0 = cycles[0]
         cycle1 = cycles[1]
+
         # head0_velocity = cycle0.get_head().get_velocity()
         # head1_velocity = cycle1.get_head().get_velocity()
         
@@ -46,7 +47,6 @@ class ControlActorsAction(Action):
         # x_vel = 0
         # if not (head0_velocity is self._left or head0_velocity is self._right):
         #     if not (self._keyboard_service.is_key_down('a') and self._keyboard_service.is_key_down('d')):   # make sure they're not both pressed at the same time
-
 
         # Cycle one 
         

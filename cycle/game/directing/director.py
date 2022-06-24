@@ -56,25 +56,29 @@ class Director:
             if self._keyboard_service.is_key_down('x'):
                     return
 
-            # resets ssome game values if "r" is pressed        
-            if self._keyboard_service.is_key_down('r'):
-        
-                    # for resting the cycle trails
-                    cycles = self._cast.get_actors("cycles")
-                    cycle0 = cycles[0]
-                    cycle1 = cycles[1]
-                    cycle0.reset_body()
-                    cycle1.reset_body()
+            actions = self._script.get_actions("update")
+            handle_collisions = actions[1]
+            first_collision_bool = handle_collisions.get_first_collision_bool()
+            if first_collision_bool == True:
+                # resets some game values if "r" is pressed        
+                if self._keyboard_service.is_key_down('r'):
+            
+                        # for reseting the cycle trails
+                        cycles = self._cast.get_actors("cycles")
+                        cycle0 = cycles[0]
+                        cycle1 = cycles[1]
+                        cycle0.reset_body()
+                        cycle1.reset_body()
 
-                    # for reseting collisions and round over message
-                    actions = self._script.get_actions("update")
-                    handle_collisions = actions[1]
-                    handle_collisions.reset_collisions()
+                        # for reseting collisions and round over message
+                        actions = self._script.get_actions("update")
+                        handle_collisions = actions[1]
+                        handle_collisions.reset_collisions()
 
-                    # for reseting the direction the cycles are moving for the next round
-                    inputs = self._script.get_actions("input")
-                    handle_inputs = inputs[0]
-                    handle_inputs.reset_direction()
+                        # for reseting the direction the cycles are moving for the next round
+                        inputs = self._script.get_actions("input")
+                        handle_inputs = inputs[0]
+                        handle_inputs.reset_direction()
 
         self._video_service.close_window()
 
