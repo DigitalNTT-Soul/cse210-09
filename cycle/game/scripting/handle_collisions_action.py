@@ -59,16 +59,6 @@ class HandleCollisionsAction(Action):
         if self._new_round_message == False:
             self._message.set_text(" ") 
 
-        # for segment in segments0:
-        #     if (head0.get_position().equals(segment.get_position()) or
-        #         head1.get_position().equals(segment.get_position())):
-        #         self._handle_game_over(cast, cycles)
-
-        # for segment in segments1:
-        #     if (head0.get_position().equals(segment.get_position()) or
-        #         head1.get_position().equals(segment.get_position())):
-        #         self._handle_game_over(cast, cycles)
-
         for segment in segments0:
             if head0.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
@@ -97,9 +87,12 @@ class HandleCollisionsAction(Action):
         """
         self._new_round_message = True
 
+        cycles = cast.get_actors("cycles")
+        for cycle in cycles:
+            cycle.set_cycle_collision_bool_true()
+
         if self._first_collision == False:
             self._wilheim.play_wilhelm()
-            # self._wilheim.stop_music()
             self._first_collision = True
 
         segments0 = cycles[0].get_segments()
@@ -112,7 +105,6 @@ class HandleCollisionsAction(Action):
         if self._new_round_message == True:
             
             self._message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R\n OR PRESS ESC TO EXIT THE GRID")
-            # self._message.set_text(" ") 
             self._message.set_font_size(30)
             self._message.set_color(config.YELLOW)
             self._message.set_position(position)
@@ -146,3 +138,7 @@ class HandleCollisionsAction(Action):
         self._give_point_collision = False
         self._is_game_over = False
         self._new_round_message = False
+
+        # cycles = cast.get_actors("cycles")
+        # for cycle in cycles:
+        #     cycle.set_cycle_collision_bool_true()
