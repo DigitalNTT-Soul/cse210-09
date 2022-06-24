@@ -20,7 +20,7 @@ class SoundService:
     def play_music(self):
         '''Stream music_file in a blocking manner'''
         if not pygame.mixer.music.get_busy():
-            pygame.mixer.music.play()
+            pygame.mixer.music.play(-1)
 
     def play_wilhelm(self):
         self._path_for_wil = os.path.abspath(__file__)
