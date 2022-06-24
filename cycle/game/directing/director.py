@@ -30,8 +30,7 @@ class Director:
         self._keyboard_service = KeyboardService()
         self._video_service = VideoService()
         self._sound_service = SoundService()
-        self._cast = Cast()
-        # self._handelcollisionsaction = HandleCollisionsAction()  
+        self._cast = Cast() 
         self._script = Script()
         self._play_new_round = True
                
@@ -43,7 +42,7 @@ class Director:
             cast (Cast): The cast of actors.
             script (Script): The script of actions.
         """
-        #while self._play_new_round:
+        # while self._play_new_round:
         self._video_service.open_window()
         self._build_game()
             
@@ -53,22 +52,28 @@ class Director:
             self._execute_actions("update")
             self._execute_actions("output")
                 
-                #exits game if 'x' is pressed
+            # exits game if 'x' is pressed
             if self._keyboard_service.is_key_down('x'):
                     return
+
+            # resets ssome game values if "r" is pressed        
             if self._keyboard_service.is_key_down('r'):
         
+                    # for resting the cycle trails
                     cycles = self._cast.get_actors("cycles")
                     cycle0 = cycles[0]
                     cycle1 = cycles[1]
                     cycle0.reset_body()
                     cycle1.reset_body()
 
+                    # for reseting collisions and round over message
                     actions = self._script.get_actions("update")
                     handle_collisions = actions[1]
+                    handle_collisions.reset_collisions()
+
+                    # for reseting the direction the cycles are moving for the next round
                     inputs = self._script.get_actions("input")
                     handle_inputs = inputs[0]
-                    handle_collisions.reset_collisions()
                     handle_inputs.reset_direction()
 
         self._video_service.close_window()
@@ -96,6 +101,3 @@ class Director:
         actions = self._script.get_actions(group)    
         for action in actions:
             action.execute(self._cast, self._script)
-    
-    #def end_game(self):
-        #"""Exits game if player presses """

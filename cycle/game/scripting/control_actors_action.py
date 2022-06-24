@@ -49,6 +49,7 @@ class ControlActorsAction(Action):
 
 
         # Cycle one 
+        
         # left
         if self._keyboard_service.is_key_down('a'):
             self._direction0 = Point(-config.CELL_SIZE, 0)

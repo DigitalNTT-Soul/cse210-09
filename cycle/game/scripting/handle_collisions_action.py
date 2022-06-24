@@ -3,7 +3,6 @@ from game.casting.actor import Actor
 from game.scripting.action import Action
 from game.shared.point import Point
 from game.services.sound_service import SoundService
-# from game.casting.score import Score
 
 class HandleCollisionsAction(Action):
     """
@@ -21,7 +20,9 @@ class HandleCollisionsAction(Action):
         self._first_collision = False
         self._give_point_collision = False
         self._is_game_over = False
+        self._new_round_message = False
         self._wilheim = SoundService()
+        self._message = Actor()
 
     def get_game_over_bool(self):
         return self._is_game_over
@@ -51,7 +52,10 @@ class HandleCollisionsAction(Action):
 
         head1 = cycle1.get_segments()[0]
         segments1 = cycle1.get_segments()[1:]
-        
+
+        if self._new_round_message == False:
+            self._message.set_text(" ") 
+
         # for segment in segments0:
         #     if (head0.get_position().equals(segment.get_position()) or
         #         head1.get_position().equals(segment.get_position())):
@@ -81,15 +85,15 @@ class HandleCollisionsAction(Action):
             if head1.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
                 self._handle_points(cast, 0)
-    
-       
-        
+         
     def _handle_game_over(self, cast, cycles):
         """Shows the 'game over' message and turns the cycle and food white if the game is over.
         
         Args:
             cast (Cast): The cast of Actors in the game.
         """
+        self._new_round_message = True
+
         if self._first_collision == False:
             self._wilheim.play_wilhelm()
             self._wilheim.stop_music()
@@ -102,19 +106,21 @@ class HandleCollisionsAction(Action):
         y = int(config.MAX_Y / 2)
         position = Point(x, y)
 
-        message = Actor()
-        message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R\n OR PRESS X TO EXIT THE GRID")
-        message.set_font_size(30)
-        message.set_color(config.YELLOW)
-        message.set_position(position)
-        cast.add_actor("messages", message)
+        if self._new_round_message == True:
+            
+            self._message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R\n OR PRESS X TO EXIT THE GRID")
+            # self._message.set_text(" ") 
+            self._message.set_font_size(30)
+            self._message.set_color(config.YELLOW)
+            self._message.set_position(position)
+            cast.add_actor("messages", self._message)
 
         for segment in segments0:
             segment.set_color(config.WHITE)
 
         for segment in segments1:
             segment.set_color(config.WHITE)
-           
+  
 
     def _handle_points(self, cast, cycle_num):
 
@@ -136,3 +142,4 @@ class HandleCollisionsAction(Action):
         self._first_collision = False
         self._give_point_collision = False
         self._is_game_over = False
+        self._new_round_message = False
