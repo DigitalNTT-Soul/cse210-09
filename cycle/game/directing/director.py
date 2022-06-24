@@ -56,6 +56,7 @@ class Director:
             if self._keyboard_service.is_key_down('x'):
                     return
 
+            # gets the first collision booleon from handle_collisions_action
             actions = self._script.get_actions("update")
             handle_collisions = actions[1]
             first_collision_bool = handle_collisions.get_first_collision_bool()

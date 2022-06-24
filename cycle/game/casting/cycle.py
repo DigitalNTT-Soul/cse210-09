@@ -70,7 +70,7 @@ class Cycle(Actor):
         head = Actor()
         head.set_position(Point(int(config.MAX_X * (self._player_num + 1)/(self._player_count + 1)), int(config.MAX_Y / 2)))
         head.set_velocity(Point(config.CELL_SIZE, 0))
-        head.set_text("O")
+        head.set_text("@")
         head.set_color(config.WHITE)
 
         self._segments.append(head)

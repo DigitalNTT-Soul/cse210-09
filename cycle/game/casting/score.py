@@ -36,7 +36,7 @@ class Score(Actor):
                     case 3:
                         self.set_color(config.YELLOW)
                         self.set_position(Point(int(800), int(600)))
-                        self.set_font_size(25)
+                
 
     def add_points(self, points):
         """Adds the given points to the score's total points.
