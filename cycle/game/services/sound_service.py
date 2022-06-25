@@ -29,7 +29,7 @@ class SoundService:
 
     def stop_music(self):
         pygame.mixer.music.stop()
-    #     pygame.mixer.music.pause()
+        # pygame.mixer.music.pause()
 
 
 

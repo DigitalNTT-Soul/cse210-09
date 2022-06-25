@@ -18,6 +18,7 @@ class HandleCollisionsAction(Action):
     def __init__(self):
         """Constructs a new HandleCollisionsAction."""
         self._first_collision = False
+        self._tie = False
         self._give_point_collision = False
         self._is_game_over = False
         self._new_round_message = False
@@ -56,37 +57,42 @@ class HandleCollisionsAction(Action):
         head1 = cycle1.get_segments()[0]
         segments1 = cycle1.get_segments()[1:]
 
-        if self._new_round_message == False:
-            self._message.set_text(" ") 
+        if self._tie == False:
+            if self._new_round_message == False:
+                self._message.set_text(" ") 
 
-        # for segment in segments0:
-        #     if (head0.get_position().equals(segment.get_position()) or
-        #         head1.get_position().equals(segment.get_position())):
-        #         self._handle_game_over(cast, cycles)
+        for segment in segments0:
+            if head0.get_position().equals(head1.get_position()):
+                self._tie = True
+                self._handle_tie_condition(cast)
 
-        # for segment in segments1:
-        #     if (head0.get_position().equals(segment.get_position()) or
-        #         head1.get_position().equals(segment.get_position())):
-        #         self._handle_game_over(cast, cycles)
+        for segment in segments1:
+            if head1.get_position().equals(head0.get_position()):
+                self._tie = True
+                self._handle_tie_condition(cast)
 
         for segment in segments0:
             if head0.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
+                # if self._new_round_message == False:
                 self._handle_points(cast, 1)
 
         for segment in segments0:
             if head1.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
+                # if self._new_round_message == False:
                 self._handle_points(cast, 0)
 
         for segment in segments1:
             if head0.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
+                # if self._new_round_message == False:
                 self._handle_points(cast, 1)
 
         for segment in segments1:
             if head1.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
+                # if self._new_round_message == False:
                 self._handle_points(cast, 0)
          
     def _handle_game_over(self, cast, cycles):
@@ -95,7 +101,13 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
+
+       
         self._new_round_message = True
+
+        cycles = cast.get_actors("cycles")
+        for cycle in cycles:
+            cycle.set_cycle_collision_bool_true()
 
         if self._first_collision == False:
             self._sound_service.play_wilhelm()
@@ -124,33 +136,49 @@ class HandleCollisionsAction(Action):
         y = int(config.MAX_Y / 2)
         position = Point(x, y)
 
-        if self._new_round_message == True:
-            
-            self._message.set_text("              ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R\n OR PRESS ESC TO EXIT THE GRID")
-            # self._message.set_text(" ") 
-            self._message.set_font_size(30)
-            self._message.set_color(config.YELLOW)
-            self._message.set_position(position)
-            cast.add_actor("messages", self._message)
+        if self._tie == False:
+            if self._new_round_message == True:
+                
+                self._message.set_text("                ROUND OVER!\n TO PLAY ANOTHER ROUND PRESS R\n  OR PRESS ESC TO EXIT THE GRID")
+                self._message.set_font_size(30)
+                self._message.set_color(config.YELLOW)
+                self._message.set_position(position)
+                cast.add_actor("messages", self._message)
 
     def _handle_points(self, cast, cycle_num):
+        
+        if self._tie == False:
+            scores = cast.get_actors("scores")
+            score0 = scores[0]
+            score1 = scores[1]
 
-        scores = cast.get_actors("scores")
-        score0 = scores[0]
-        score1 = scores[1]
+            if cycle_num == 0:
+                if self._give_point_collision == False:
+                    score0.add_points(1)
+                    self._give_point_collision = True
 
-        if cycle_num == 0:
-            if self._give_point_collision == False:
-                score0.add_points(1)
-                self._give_point_collision = True
-
-        if cycle_num == 1:
-             if self._give_point_collision == False:
-                score1.add_points(1)
-                self._give_point_collision = True
+            if cycle_num == 1:
+                if self._give_point_collision == False:
+                    score1.add_points(1)
+                    self._give_point_collision = True
 
     def reset_collisions(self):
         self._first_collision = False
         self._give_point_collision = False
         self._is_game_over = False
         self._new_round_message = False
+        self._tie = False
+
+    def _handle_tie_condition(self, cast):
+
+        x = int(config.MAX_X / 2)
+        y = int(config.MAX_Y / 2)
+        position = Point(x, y)
+
+        if self._tie == True:
+            
+            self._message.set_text("    YOU KNOCKED HEADS!\n      NO POINTS GIVEN\n PRESS R FOR A NEW ROUND")
+            self._message.set_font_size(30)
+            self._message.set_color(config.YELLOW)
+            self._message.set_position(position)
+            cast.add_actor("messages", self._message)

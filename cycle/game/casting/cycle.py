@@ -2,7 +2,6 @@ import config
 from game.casting.actor import Actor
 from game.shared.point import Point
 
-
 class Cycle(Actor):
     """
     A long limbless reptile.
@@ -17,6 +16,8 @@ class Cycle(Actor):
         self._player_num = player_num
         self._player_count = player_count
         self._segments = []
+        self._cycle_collision = False
+     
         match player_num:
             case 0:
                 self._primary_color = config.GREEN
@@ -26,10 +27,17 @@ class Cycle(Actor):
                 self._primary_color = config.BLUE
             case 3:
                 self._primary_color = config.YELLOW
-        
+            
         self._prepare_body()
-        
-
+    
+    def set_cycle_collision_bool_true(self):
+        if self._cycle_collision == False:
+            self._cycle_collision = True
+          
+    def set_cycle_collision_bool_False(self):
+        if self._cycle_collision == True:
+            self._cycle_collision = False
+       
     def get_segments(self):
         return self._segments
 
@@ -60,7 +68,10 @@ class Cycle(Actor):
             segment.set_position(position)
             segment.set_velocity(velocity)
             segment.set_text("#")
-            segment.set_color(self._primary_color)
+            if self._cycle_collision == True:
+                 segment.set_color(config.WHITE)
+            else:
+                segment.set_color(self._primary_color)
             self._segments.append(segment)
 
     def turn_head(self, velocity):
@@ -78,3 +89,4 @@ class Cycle(Actor):
     def reset_body(self):
         self._segments = []
         self._prepare_body()
+        self._cycle_collision = False

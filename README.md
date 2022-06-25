@@ -102,8 +102,9 @@ Python 3.10.4
 
 * Matt Pellét (mattpellet@byui.edu) (github: m4j0rCSE) 
     - Xtreme Technical Support
-    - Exit-game function
+    - Exit-game method
     - End-game message (contributor)
+    - Music (contributor)
 
 * Larry Brys (bry21010@byui.edu) (github: ljbrys)
     -
@@ -111,6 +112,11 @@ Python 3.10.4
     -
 
 * Ryan Manthey (ryanscom@byui.edu) (github: ryanscom)
-    -
-    -
-    -
+    - First iteration of snake growth (Dylan made better)
+    - First itertion of multipule cycles (Dylan made better)
+    - Made the sound_service.py and got first iteration of background music and collision sounds working.
+    - Bug fixes 
+    - Tie condition handling
+    - Helped with looping the rounds of play
+    - Got the scoring system working
+    - Fixed new trail growth to be white after a collision
