@@ -102,8 +102,9 @@ Python 3.10.4
 
 * Matt Pellét (mattpellet@byui.edu) (github: m4j0rCSE) 
     - Xtreme Technical Support
-    - Exit-game function
+    - Exit-game method
     - End-game message (contributor)
+    - Music (contributor)
 
 * Larry Brys (bry21010@byui.edu) (github: ljbrys)
     -
