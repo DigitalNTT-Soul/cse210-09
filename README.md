@@ -120,3 +120,4 @@ Python 3.10.4
     - Helped with looping the rounds of play
     - Got the scoring system working
     - Fixed new trail growth to be white after a collision
+    - Stoped cycles going directly back on themselves
