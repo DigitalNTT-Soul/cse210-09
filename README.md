@@ -112,6 +112,11 @@ Python 3.10.4
     -
 
 * Ryan Manthey (ryanscom@byui.edu) (github: ryanscom)
-    -
-    -
-    -
+    - First iteration of snake growth (Dylan made better)
+    - First itertion of multipule cycles (Dylan made better)
+    - Made the sound_service.py and got first iteration of background music and collision sounds working.
+    - Bug fixes 
+    - Tie condition handling
+    - Helped with looping the rounds of play
+    - Got the scoring system working
+    - Fixed new trail growth to be white after a collision
