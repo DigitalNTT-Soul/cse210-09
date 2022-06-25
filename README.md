@@ -116,6 +116,7 @@ Python 3.10.4
     - First itertion of multipule cycles (Dylan made better)
     - Made the sound_service.py and got first iteration of background music and collision sounds working.
     - Bug fixes 
+    - Collision handling
     - Tie condition handling
     - Helped with looping the rounds of play
     - Got the scoring system working

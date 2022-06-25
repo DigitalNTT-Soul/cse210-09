@@ -23,11 +23,11 @@ class Score(Actor):
         match player_num:
                     case 0:
                         self.set_color(config.GREEN)
-                        self.set_position(Point(int(config.MAX_X), int(config.MAX_Y)))
+                        self.set_position(Point(int(config.MAX_X + 5), int(config.MAX_Y)))
                         self.set_font_size(25)
                     case 1:
                         self.set_color(config.RED)
-                        self.set_position(Point(int(800), int(config.MAX_Y)))
+                        self.set_position(Point(int(790), int(config.MAX_Y)))
                         self.set_font_size(25)
                     case 2:
                         self.set_color(config.BLUE)
