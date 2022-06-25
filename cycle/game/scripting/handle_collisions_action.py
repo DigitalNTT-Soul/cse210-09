@@ -21,7 +21,7 @@ class HandleCollisionsAction(Action):
         self._give_point_collision = False
         self._is_game_over = False
         self._new_round_message = False
-        self._wilheim = SoundService()
+        self._sound_service = SoundService()
         self._message = Actor()
 
     def get_game_over_bool(self):
@@ -98,12 +98,27 @@ class HandleCollisionsAction(Action):
         self._new_round_message = True
 
         if self._first_collision == False:
-            self._wilheim.play_wilhelm()
-            # self._wilheim.stop_music()
+            self._sound_service.play_wilhelm()
+            # self._sound_service.stop_music()
             self._first_collision = True
 
-        segments0 = cycles[0].get_segments()
-        segments1 = cycles[1].get_segments()
+        # segments0 = cycles[0].get_segments()
+        # segments1 = cycles[1].get_segments()
+
+        segment_sets = []
+        for cycle in cycles:
+            segment_sets.append(cycle.get_segments())
+
+        # for segment in segments0:
+        #     segment.set_color(config.WHITE)
+
+        # for segment in segments1:
+        #     segment.set_color(config.WHITE)
+  
+        for segment_set in segment_sets:
+            for segment in segment_set:
+                segment.set_color(config.WHITE)
+
 
         x = int(config.MAX_X / 2)
         y = int(config.MAX_Y / 2)
@@ -117,13 +132,6 @@ class HandleCollisionsAction(Action):
             self._message.set_color(config.YELLOW)
             self._message.set_position(position)
             cast.add_actor("messages", self._message)
-
-        for segment in segments0:
-            segment.set_color(config.WHITE)
-
-        for segment in segments1:
-            segment.set_color(config.WHITE)
-  
 
     def _handle_points(self, cast, cycle_num):
 
