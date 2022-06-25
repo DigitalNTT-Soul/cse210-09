@@ -16,7 +16,8 @@ class HandleCollisionsAction(Action):
     """
 
     def __init__(self):
-        """Constructs a new HandleCollisionsAction."""
+        """Constructs a new HandleCollisionsAction.
+        """
         self._first_collision = False
         self._tie = False
         self._give_point_collision = False
@@ -26,9 +27,13 @@ class HandleCollisionsAction(Action):
         self._message = Actor()
 
     def get_game_over_bool(self):
+        """ Gets the game over boolean
+        """
         return self._is_game_over
 
     def get_first_collision_bool(self):
+        """ Gets the first collision boolean
+        """
         return self._first_collision
 
     def execute(self, cast, script):
@@ -74,25 +79,21 @@ class HandleCollisionsAction(Action):
         for segment in segments0:
             if head0.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
-                # if self._new_round_message == False:
                 self._handle_points(cast, 1)
 
         for segment in segments0:
             if head1.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
-                # if self._new_round_message == False:
                 self._handle_points(cast, 0)
 
         for segment in segments1:
             if head0.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
-                # if self._new_round_message == False:
                 self._handle_points(cast, 1)
 
         for segment in segments1:
             if head1.get_position().equals(segment.get_position()):
                 self._handle_game_over(cast, cycles)
-                # if self._new_round_message == False:
                 self._handle_points(cast, 0)
          
     def _handle_game_over(self, cast, cycles):
@@ -100,9 +101,9 @@ class HandleCollisionsAction(Action):
         
         Args:
             cast (Cast): The cast of Actors in the game.
+            cycles (Actors): The cycles
         """
 
-       
         self._new_round_message = True
 
         cycles = cast.get_actors("cycles")
@@ -111,26 +112,15 @@ class HandleCollisionsAction(Action):
 
         if self._first_collision == False:
             self._sound_service.play_wilhelm()
-            # self._sound_service.stop_music()
             self._first_collision = True
-
-        # segments0 = cycles[0].get_segments()
-        # segments1 = cycles[1].get_segments()
 
         segment_sets = []
         for cycle in cycles:
             segment_sets.append(cycle.get_segments())
-
-        # for segment in segments0:
-        #     segment.set_color(config.WHITE)
-
-        # for segment in segments1:
-        #     segment.set_color(config.WHITE)
   
         for segment_set in segment_sets:
             for segment in segment_set:
                 segment.set_color(config.WHITE)
-
 
         x = int(config.MAX_X / 2)
         y = int(config.MAX_Y / 2)
@@ -146,6 +136,12 @@ class HandleCollisionsAction(Action):
                 cast.add_actor("messages", self._message)
 
     def _handle_points(self, cast, cycle_num):
+        """ Handles giving points to the cycles
+
+        Args:
+            cast (Actors): All actors objects in the game
+            cycle_num (int): Number of cycles
+        """
         
         if self._tie == False:
             scores = cast.get_actors("scores")
@@ -163,6 +159,8 @@ class HandleCollisionsAction(Action):
                     self._give_point_collision = True
 
     def reset_collisions(self):
+        """ Resets boolean values to False. Clears messages from the screen. Resets collisions
+        """
         self._first_collision = False
         self._give_point_collision = False
         self._is_game_over = False
@@ -170,6 +168,11 @@ class HandleCollisionsAction(Action):
         self._tie = False
 
     def _handle_tie_condition(self, cast):
+        """ Handles tie conditions. Displayes tie message.
+
+        Args:
+            cast (Actors): All Actor objects in the game. 
+        """
 
         x = int(config.MAX_X / 2)
         y = int(config.MAX_Y / 2)

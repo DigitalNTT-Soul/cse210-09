@@ -76,6 +76,8 @@ class Director:
         self._video_service.close_window()
 
     def _build_game(self):
+        """ Builds the game
+        """
         for i in range(config.PLAYER_COUNT):
             self._cast.add_actor("cycles", Cycle(i, config.PLAYER_COUNT))
 

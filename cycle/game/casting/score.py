@@ -48,4 +48,6 @@ class Score(Actor):
         self.set_text(f"Score: {self._points}")
 
     def reset_points(self):
+        """ Resets the number of points earned to 0
+        """
         self._points = 0

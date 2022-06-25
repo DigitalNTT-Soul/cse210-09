@@ -46,11 +46,6 @@ class ControlActorsAction(Action):
         head0 = cycle0.get_head()
         head1 = cycle1.get_head()
         
-        # # Player 1 horizontal velocity
-        # x_vel = 0
-        # if not (head0_velocity is self._left or head0_velocity is self._right):
-        #     if not (self._keyboard_service.is_key_down('a') and self._keyboard_service.is_key_down('d')):   # make sure they're not both pressed at the same time
-
         # Cycle 0
         if self._direction0  is self._left:
             if self._keyboard_service.is_key_down('d'):

@@ -122,3 +122,4 @@ Python 3.10.4
     - Got the scoring system working
     - Fixed new trail growth to be white after a collision
     - Stoped cycles going directly back on themselves
+    - Added comments to some methods and classes

@@ -4,12 +4,15 @@ from game.shared.point import Point
 
 class Cycle(Actor):
     """
-    A long limbless reptile.
+    A lightcycle a "A video game created motorbike".
     
-    The responsibility of cycle is to move itself.
+    The responsibility of cycle is to move itself. And to grow a trail.
 
     Attributes:
-        _points (int): The number of points the food is worth.
+        _player_num (int): The number of cycles
+        _player_count (int): The number of cycles
+        _segments (list): The amount of segemnts there are currently 
+        _cycle_collision (boolean): Boolean to check if a collision has occurred
     """
     def __init__(self, player_num: int = 0, player_count: int = 2):
         super().__init__()
@@ -31,17 +34,26 @@ class Cycle(Actor):
         self._prepare_body()
     
     def set_cycle_collision_bool_true(self):
+        """Sets the collision boolean to true
+        """
         if self._cycle_collision == False:
             self._cycle_collision = True
           
     def set_cycle_collision_bool_False(self):
+        """Sets the collision boolean to true
+        """
+
         if self._cycle_collision == True:
             self._cycle_collision = False
        
     def get_segments(self):
+        """ Gets the segments list
+        """
         return self._segments
 
     def move_next(self):
+        """ Moves the cycle forward to the next space and calls the grow tail method
+        """
         
         # move all segments
         for segment in self._segments:
@@ -55,9 +67,16 @@ class Cycle(Actor):
         self.grow_tail(1)
 
     def get_head(self):
+        """ Gets the head of the cycle. (First possition in the segments list)
+        """
         return self._segments[0]
 
     def grow_tail(self, number_of_segments):
+        """ Grows the trail of the cycles.
+
+        Args:
+            number_of_segments (int): Number of segemnts to grow each game loop
+        """
         for i in range(number_of_segments):
             tail = self._segments[-1]
             velocity = tail.get_velocity()
@@ -75,9 +94,16 @@ class Cycle(Actor):
             self._segments.append(segment)
 
     def turn_head(self, velocity):
+        """Turnes the head of the cycle.
+
+        Args:
+            velocity (tuple): A Point tuple representing the direction the cycle is moving.
+        """
         self._segments[0].set_velocity(velocity)
     
     def _prepare_body(self):
+        """ Contructs the cycle: Position, velocity, text, color, etc...
+        """
         head = Actor()
         head.set_position(Point(int(config.MAX_X * (self._player_num + 1)/(self._player_count + 1)), int(config.MAX_Y / 2)))
         head.set_velocity(Point(config.CELL_SIZE, 0))
@@ -87,6 +113,8 @@ class Cycle(Actor):
         self._segments.append(head)
 
     def reset_body(self):
+        """ Resets some cycle attributes
+        """
         self._segments = []
         self._prepare_body()
         self._cycle_collision = False
