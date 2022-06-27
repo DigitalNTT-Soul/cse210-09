@@ -91,29 +91,36 @@ Python 3.10.4
 ---
 
 * Dylan Ruppell (ruppelld@byui.edu) (github: DigitalNTT-Soul)
-    -
-    -
-    -
+    - Implemented snake growth
+    - Implemented multipule cycles (And the ability to add more if needed)
+    - Bug Fixes
+    - Worked on cycle collisions
+    - Migration of code from constants and main
+    - Music looping bug fixes
+    - Removed references to snakes, replaced with cycles 
+    - General code consulatant and collaborator
     
 * Austin Donovan (iskarr9g@gmail.com) (github: Iskarr)
-    -
-    -
-    -
+    - Helped with Music looping
+    - Added music files
+    - Helped with cycle collisions and collision sounds
+    - General code consulatant and collaborator
 
 * Matt Pellét (mattpellet@byui.edu) (github: m4j0rCSE) 
     - Xtreme Technical Support
     - Exit-game method
     - End-game message (contributor)
     - Music (contributor)
+    - General code consulatant and collaborator
 
 * Larry Brys (bry21010@byui.edu) (github: ljbrys)
-    -
-    -
-    -
+    - Worked on game looping
+    - Worked on resting game values for the new round
+    - General code consulatant and collaborator
 
 * Ryan Manthey (ryanscom@byui.edu) (github: ryanscom)
     - First iteration of snake growth (Dylan made better)
-    - First itertion of multipule cycles (Dylan made better)
+    - First iteration of multipule cycles (Dylan made better)
     - Made the sound_service.py and got first iteration of background music and collision sounds working.
     - Bug fixes 
     - Collision handling
@@ -123,3 +130,4 @@ Python 3.10.4
     - Fixed new trail growth to be white after a collision
     - Stoped cycles going directly back on themselves
     - Added comments to some methods and classes
+    - General code consulatant and collaborator
