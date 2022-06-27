@@ -1,8 +1,8 @@
 from game.shared.color import Color
 
 # Now adjusts true resolution to nearest whole cell value below target resolution
-TARGET_MAX_X = 1500
-TARGET_MAX_Y = 1000
+TARGET_MAX_X = 900
+TARGET_MAX_Y = 600
 CELL_SIZE = 15
 COLUMNS = int(TARGET_MAX_X / CELL_SIZE)
 ROWS = int(TARGET_MAX_Y / CELL_SIZE)
