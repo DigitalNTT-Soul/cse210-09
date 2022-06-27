@@ -1,13 +1,17 @@
 from game.shared.color import Color
 
-
-COLUMNS = 40
-ROWS = 20
+# Now adjusts true resolution to nearest whole cell value below target resolution
+TARGET_MAX_X = 1500
+TARGET_MAX_Y = 1000
 CELL_SIZE = 15
-MAX_X = 900
-MAX_Y = 600
+COLUMNS = int(TARGET_MAX_X / CELL_SIZE)
+ROWS = int(TARGET_MAX_Y / CELL_SIZE)
+MAX_X = COLUMNS * CELL_SIZE
+MAX_Y = ROWS * CELL_SIZE
+
+FONT_SIZE = CELL_SIZE
+
 FRAME_RATE = 7
-FONT_SIZE = 15
 CAPTION = "CYCLE"
 WHITE = Color(255, 255, 255)
 RED = Color(255, 0, 0)
