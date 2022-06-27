@@ -20,22 +20,19 @@ class Score(Actor):
         self._player_count = player_count
         self._points = 0
         self.add_points(0)
+        self.set_font_size(25)
+        x = player_num * int(config.MAX_X / player_count)
+        self.set_position(Point(x, 0))
         match player_num:
-                    case 0:
-                        self.set_color(config.GREEN)
-                        self.set_position(Point(int(config.MAX_X + 5), int(config.MAX_Y)))
-                        self.set_font_size(25)
-                    case 1:
-                        self.set_color(config.RED)
-                        self.set_position(Point(int(790), int(config.MAX_Y)))
-                        self.set_font_size(25)
-                    case 2:
-                        self.set_color(config.BLUE)
-                        self.set_position(Point(int(config.MAX_X), int(600)))
-                        self.set_font_size(25)
-                    case 3:
-                        self.set_color(config.YELLOW)
-                        self.set_position(Point(int(800), int(600)))
+            case 0:
+                self.set_color(config.GREEN)
+            case 1:
+                self.set_color(config.RED)
+            case 2:
+                self.set_color(config.BLUE)
+            case 3:
+                self.set_color(config.YELLOW)
+        
                 
 
     def add_points(self, points):
