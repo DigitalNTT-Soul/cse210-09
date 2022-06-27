@@ -54,44 +54,32 @@ class Cycle(Actor):
     def move_next(self):
         """ Moves the cycle forward to the next space and calls the grow tail method
         """
-        
-        # move all segments
-        for segment in self._segments:
-            segment.move_next()
-        # update velocities
-        for i in range(len(self._segments) - 1, 0, -1):
-            trailing = self._segments[i]
-            previous = self._segments[i - 1]
-            velocity = previous.get_velocity()
-            trailing.set_velocity(velocity)
-        self.grow_tail(1)
+
+        self._segments[0].move_next()
+
+        self.grow_tail()
 
     def get_head(self):
         """ Gets the head of the cycle. (First possition in the segments list)
         """
         return self._segments[0]
 
-    def grow_tail(self, number_of_segments):
+    def grow_tail(self):
         """ Grows the trail of the cycles.
 
         Args:
             number_of_segments (int): Number of segemnts to grow each game loop
         """
-        for i in range(number_of_segments):
-            tail = self._segments[-1]
-            velocity = tail.get_velocity()
-            offset = velocity.reverse()
-            position = tail.get_position().add(offset)
-            
-            segment = Actor()
-            segment.set_position(position)
-            segment.set_velocity(velocity)
-            segment.set_text("#")
-            if self._cycle_collision == True:
-                 segment.set_color(config.WHITE)
-            else:
-                segment.set_color(self._primary_color)
-            self._segments.append(segment)
+        head = self._segments[0]
+        segment = Actor()
+        position = head.get_position().add(head.get_velocity().reverse())
+        segment.set_position(position)
+        segment.set_text("#")
+        if self._cycle_collision:
+            segment.set_color(config.WHITE)
+        else:
+            segment.set_color(self._primary_color)
+        self._segments.append(segment)
 
     def turn_head(self, velocity):
         """Turnes the head of the cycle.
@@ -105,8 +93,11 @@ class Cycle(Actor):
         """ Contructs the cycle: Position, velocity, text, color, etc...
         """
         head = Actor()
-        head.set_position(Point(int(config.MAX_X * (self._player_num + 1)/(self._player_count + 1)), int(config.MAX_Y / 2)))
-        head.set_velocity(Point(config.CELL_SIZE, 0))
+        x = int(config.COLUMNS * (self._player_num + 1)/(self._player_count + 1))
+        y = int(config.ROWS / 2)
+        position = Point(x, y).scale(config.CELL_SIZE)
+        head.set_position(position)
+        head.set_velocity(Point(0, -config.CELL_SIZE))
         head.set_text("@")
         head.set_color(config.WHITE)
 
