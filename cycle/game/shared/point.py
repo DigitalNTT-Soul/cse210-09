@@ -18,6 +18,15 @@ class Point:
         """
         self._x = x
         self._y = y
+    
+    def __str__(self):
+        return f"Point({self._x}, {self._y})"
+    
+    def __eq__(self, other):
+        return self.equals(other)
+    
+    def __ne__(self, other):
+        return not self.equals(other)
 
     def add(self, other):
         """Gets a new point that is the sum of this and the given one.
