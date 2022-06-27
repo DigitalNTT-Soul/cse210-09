@@ -25,8 +25,12 @@ class ControlActorsAction(Action):
         self._right = Point(config.CELL_SIZE, 0)
         self._up = Point(0, -config.CELL_SIZE)
         self._down = Point(0, config.CELL_SIZE)
-        self._direction0 = self._up
-        self._direction1 = self._up
+        self._key_chart = [
+            ['w','a','s','d'],
+            ['i','j','k','l'],
+            ['t','f','g','h'],
+            ['up_arrow','left_arrow','down_arrow','right_arrow']
+        ]
 
     def execute(self, cast, script):
         """Executes the control actors action.
@@ -37,162 +41,19 @@ class ControlActorsAction(Action):
         """ 
         
         cycles = cast.get_actors("cycles")
-        cycle0 = cycles[0]
-        cycle1 = cycles[1]
 
-        head0_velocity = cycle0.get_head().get_velocity()
-        head1_velocity = cycle1.get_head().get_velocity()
-
-        head0 = cycle0.get_head()
-        head1 = cycle1.get_head()
-        
-        # Cycle 0
-        if self._direction0  is self._left:
-            if self._keyboard_service.is_key_down('d'):
-                self._direction0 = self._left
-
-            if self._keyboard_service.is_key_down('a'):
-                self._direction0 = self._left 
-
-            if self._keyboard_service.is_key_down('w'):
-                self._direction0 = self._up
-
-            if self._keyboard_service.is_key_down('s'):
-                self._direction0 = self._down 
-              
-        if  self._direction0 is self._right:
-            if self._keyboard_service.is_key_down('a'):
-                self._direction0 = self._right
-           
-            if self._keyboard_service.is_key_down('d'):
-                self._direction0 = self._right
-
-            if self._keyboard_service.is_key_down('w'):
-                self._direction0 = self._up
-
-            if self._keyboard_service.is_key_down('s'):
-                self._direction0 = self._down       
-
-        if  self._direction0 is self._up:
-            if self._keyboard_service.is_key_down('s'):
-                self._direction0 = self._up
-
-            if self._keyboard_service.is_key_down('a'):
-                self._direction0 = self._left 
- 
-            if self._keyboard_service.is_key_down('d'):
-                self._direction0 = self._right
-
-            if self._keyboard_service.is_key_down('w'):
-                self._direction0 = self._up  
-
-        if  self._direction0 is self._down:
-            if self._keyboard_service.is_key_down('w'):
-                self._direction0 = self._down
-            
-            if self._keyboard_service.is_key_down('a'):
-                self._direction0 = self._left 
-    
-            if self._keyboard_service.is_key_down('d'):
-                self._direction0 = self._right
-
-            if self._keyboard_service.is_key_down('s'):
-                self._direction0 = self._down
-
-         # Cycle 1
-        if self._direction1  is self._left:
-            if self._keyboard_service.is_key_down('l'):
-                self._direction1 = self._left
-
-            if self._keyboard_service.is_key_down('j'):
-                self._direction1 = self._left 
-
-            if self._keyboard_service.is_key_down('i'):
-                self._direction1 = self._up
-
-            if self._keyboard_service.is_key_down('k'):
-                self._direction1 = self._down 
-              
-        if  self._direction1 is self._right:
-            if self._keyboard_service.is_key_down('j'):
-                self._direction1 = self._right
-           
-            if self._keyboard_service.is_key_down('l'):
-                self._direction1 = self._right
-
-            if self._keyboard_service.is_key_down('i'):
-                self._direction1 = self._up
-
-            if self._keyboard_service.is_key_down('k'):
-                self._direction1 = self._down 
-               
-        if  self._direction1 is self._up:
-            if self._keyboard_service.is_key_down('k'):
-                self._direction1 = self._up
-
-            if self._keyboard_service.is_key_down('j'):
-                self._direction1 = self._left 
- 
-            if self._keyboard_service.is_key_down('l'):
-                self._direction1 = self._right
-
-            if self._keyboard_service.is_key_down('i'):
-                self._direction1 = self._up
-            
-        if  self._direction1 is self._down:
-            if self._keyboard_service.is_key_down('i'):
-                self._direction1 = self._down
-            
-            if self._keyboard_service.is_key_down('j'):
-                self._direction1 = self._left 
-    
-            if self._keyboard_service.is_key_down('l'):
-                self._direction1 = self._right
-
-            if self._keyboard_service.is_key_down('k'):
-                self._direction1 = self._down 
-       
-
-        # Cycle 0 
-        
-        # # left
-        # if self._keyboard_service.is_key_down('a'):
-        #     self._direction0 = self._left 
- 
-        # # right
-        # if self._keyboard_service.is_key_down('d'):
-        #     self._direction0 = self._right
-
-        # # up
-        # if self._keyboard_service.is_key_down('w'):
-        #     self._direction0 = self._up
-
-        # # down
-        # if self._keyboard_service.is_key_down('s'):
-        #     self._direction0 = self._down 
-
-            
-        # Cycle 1
-
-        # # up
-        # if self._keyboard_service.is_key_down('i'):
-        #     self._direction1 = self._up
-  
-        # # down
-        # if self._keyboard_service.is_key_down('k'):
-        #     self._direction1 = self._down
-  
-        # # left
-        # if self._keyboard_service.is_key_down('j'):
-        #     self._direction1 = self._left
-  
-        # # right
-        # if self._keyboard_service.is_key_down('l'):
-        #     self._direction1 = self._right
-        
-        cycle0.turn_head(self._direction0)
-        cycle1.turn_head(self._direction1)
-
-    def reset_direction(self):
-        self._direction0 = self._up
-        self._direction1 = self._up
+        for i in range(len(cycles)):
+            head_velocity = cycles[i].get_head().get_velocity()
+            direction = Point(0,0)
+            if head_velocity == self._left or head_velocity == self._right:
+                if self._keyboard_service.is_key_down(self._key_chart[i][0]):
+                    direction = direction.add(self._up)
+                if self._keyboard_service.is_key_down(self._key_chart[i][2]):
+                    direction = direction.add(self._down)
+            if head_velocity == self._up or head_velocity == self._down:
+                if self._keyboard_service.is_key_down(self._key_chart[i][1]):
+                    direction = direction.add(self._left)
+                if self._keyboard_service.is_key_down(self._key_chart[i][3]):
+                    direction = direction.add(self._right)
+            if direction != Point(0,0):
+                cycles[i].turn_head(direction)
