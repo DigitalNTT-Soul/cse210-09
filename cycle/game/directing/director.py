@@ -68,11 +68,6 @@ class Director:
                         # for reseting collisions and round over message
                         handle_collisions.reset_collisions()
 
-                        # for reseting the direction the cycles are moving for the next round
-                        inputs = self._script.get_actions("input")
-                        handle_inputs = inputs[0]
-                        handle_inputs.reset_direction()
-
         self._video_service.close_window()
 
     def _build_game(self):
